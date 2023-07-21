@@ -83,7 +83,7 @@ export default function SignupPage() {
       <button onClick={onSignup} className=" bg-green-400 rounded-2xl p-2 text-black hover:bg-green-600 m-8">
        {buttonDisabled ? "no signup" : "signup"}
       </button>
-      <Link className=" underline" href="/login">Don't have any account?</Link>
+      <Link className=" underline" href="/login">Already have an account?</Link>
     </div></div>
   );
 }
