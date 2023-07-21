@@ -73,7 +73,7 @@ else{
       <button onClick={onLogin} className=" bg-green-400 rounded-2xl p-2 text-black hover:bg-green-600 m-8">
         {buttonDisabled?"no log in":"login"}
       </button>
-      <Link className=" underline" href="/signup">Don't have any account</Link>
+      <Link className="underline" href="/signup">Dont have any account</Link>
     </div></div>
   );
 }
