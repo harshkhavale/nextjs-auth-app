@@ -32,7 +32,7 @@ export async function POST(request: NextRequest) {
     });
     console.log(savedUser);
 
-    await sendEmail({email,emailType:"VERIFY",userId:savedUser._id})
+    // await sendEmail({email,emailType:"VERIFY",userId:savedUser._id})
         return NextResponse.json({
         message:"user crated successfully!",
         success:true,
