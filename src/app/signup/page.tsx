@@ -3,8 +3,8 @@ import Link from "next/link";
 import React, { useEffect , useState } from "react";
 import { useRouter } from "next/navigation";
 import axios from "axios";
-import {toast} from "react-hot-toast";
-
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 export default function SignupPage() {
   const router = useRouter()
   const [user, setUser] = useState({
@@ -16,18 +16,27 @@ export default function SignupPage() {
   const [buttonDisabled,setButtonDisabled] = useState(false);
   const [loading,setLoading] = useState(false);
   const onSignup = async () => {
-    try {
-      setLoading(true);
+    if(
+      !buttonDisabled
+    ){
+      try {
+        setLoading(true);
+  
+        const response = await axios.post("/api/users/signup",user);
+        console.log("signup success",response.data);
+        toast.success("signup success");
 
-      const response = await axios.post("/api/users/signup",user);
-      console.log("signup success",response.data);
-      router.push("/login");
-    } catch (error:any) {
-      toast.error(error.message);
-      console.log("signup failed",error.message);    }
-      finally{
-        setLoading(false);
-      }
+        router.push("/login");
+      } catch (error:any) {
+        toast.error(error.response.data.error);
+        console.log("signup failed",error.message);    }
+        finally{
+          setLoading(false);
+        }
+    }else{
+      toast("all fields are mandatory!")
+    }
+    
    
     
   };
@@ -41,9 +50,9 @@ export default function SignupPage() {
   },[user]);
 
   return (
-    <div>
-    <div className="flex flex-col items-center justify-center min-h-screen py-2">
-      <h1 className="text-2xl">{loading ? "wait a moment" : "signup"}</h1>
+    <div className=" min-h-screen flex justify-center items-center">
+    <div className="flex flex-col items-center justify-center rounded-xl shadow-xl  p-8 py-2">
+      <h1 className="text-xl  bg-orange-500 rounded-md  px-3">{loading ? "wait a moment" : "signup"}</h1>
       <hr />
 <div className="my-1">
       <label className="my-1 block" htmlFor="username">username</label>
@@ -81,9 +90,9 @@ export default function SignupPage() {
       />
 </div>
       <button onClick={onSignup} className=" bg-green-400 rounded-2xl p-2 text-black hover:bg-green-600 m-8">
-       {buttonDisabled ? "no signup" : "signup"}
+       signup
       </button>
-      <Link className=" underline" href="/login">Already have an account?</Link>
+      <Link className=" " href="/login">Already have an account ?</Link>
     </div></div>
   );
 }
