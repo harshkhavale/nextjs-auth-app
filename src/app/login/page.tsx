@@ -62,30 +62,22 @@ export default function LoginPage() {
           />
         </div>
 
-        <div className="my-1">
-          <label className="my-1 leading-6 block" htmlFor="password">
-            password
-          </label>
-          <input
-            className="p-2 focus:border-gray-600 focus:outline-none text-black rounded-lg"
-            type="password"
-            value={user.password}
-            onChange={(e) => {
-              setUser({ ...user, password: e.target.value });
-            }}
-            placeholder="password"
-          />
-        </div>
-        <button
-          onClick={onLogin}
-          className=" bg-green-400 rounded-2xl p-2 text-black hover:bg-green-600 m-8"
-        >
-         login
-        </button>
-        <Link className="" href="/signup">
-          Don't have any account ?
-        </Link>
-      </div>
-    </div>
+<div className="my-1">
+      <label className="my-1 leading-6 block" htmlFor="password">password</label>
+      <input
+        className="p-2 focus:border-gray-600 focus:outline-none text-black rounded-lg"
+        type="password"
+        value={user.password}
+        onChange={(e) => {
+          setUser({ ...user, password: e.target.value });
+        }}
+        placeholder="password"
+      />
+</div>
+      <button onClick={onLogin} className=" bg-green-400 rounded-2xl p-2 text-black hover:bg-green-600 m-8">
+        {buttonDisabled?"no log in":"login"}
+      </button>
+      <Link className=" underline" href="/signup">Don't have any account</Link>
+    </div></div>
   );
 }
